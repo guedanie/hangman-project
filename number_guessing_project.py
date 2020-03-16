@@ -50,11 +50,13 @@ def turn_counter(number_turns):
         print(f"{main} {first}")
         print()
         clue_greater_less_than()
+        print()
     elif number_turns == 2:
         print()
         print(f"{main} {second}")
         print()
         clue_even_or_odd()
+        print()
     else:
         print()
         print(f"{main} {third}")
@@ -83,7 +85,7 @@ game_intro()
 while True:
     random_int = random.randint(x,y)
     user_input = 0
-    print(random_int)
+    # print(random_int)
     number_turns = 0
     
     while True:
