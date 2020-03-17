@@ -74,6 +74,9 @@ def play_again():
         print("Too bad!")
         return user_selection
 
+def tell_asnwer():
+    print()
+
 
         
 ########################
@@ -94,13 +97,15 @@ while True:
             number_turns += 1
             turn_counter(number_turns)
             if number_turns == 3:
-                print("You ran out of turns!")
+                print("")
+                print(f"The number I was thinking of was {random_int}")
+                print("")
                 break               
         else:
             print(f"You did it! {random_int} was the number I was thinking!")
             break
     
-    user_selection = input("Would you like to play again? ")
+    user_selection = input("Would you like to play again? (y/n) ")
     user_selection = user_selection.lower()
     if user_selection[0] == "y":
         user_selection = "y"
