@@ -1,8 +1,8 @@
 # Objective of the project is to create a hangman game where the
 # computer uses a randomly generated word, and ask the users to input 
 # letter so see if they can guess the word. 
-test_word = "house"
-
+# test_word = "house"
+test_word = "tree"
 
 def intro():
     print("")
@@ -62,25 +62,30 @@ def correct_letter_checker():
     win_score = 0
     lose_score = 0
     dashes = list(return_dashes(n_letters(test_word)))
-    while lose_score <= 6 or win_score <= 5:
+    while True:
         print("What letter do you want to check")
         user_input = input("")
         correct_letter_index = test_word.find(user_input)
         if correct_letter_index != -1:
             dashes[correct_letter_index] = user_input
-            new_dashes = new_dashes.join(dashes)
-            print(new_dashes)
+            print(dashes)
             win_score += 1
+            if win_score >= n_letters(test_word):
+                new_dashes = new_dashes.join(dashes)
+                print(f"You did it! The correct word was {new_dashes}")
+                break
         else: 
             print("Wrong Choice")
             lose_score += 1
-    print("You hang")
+            if lose_score >= 6:
+                print("You hang")
+                break
 
 
 
 
 
-
+res = [i for i in range(len(test_word)) if test_word.startswith(user_input, i)] 
 
 
 
