@@ -4,6 +4,7 @@
 # test_word = "house"
 # test_word = "mississippi"
 import pandas as pd
+# df = pd.read_csv('https://query.data.world/s/u2erxpyvtsazfatyrigoguunyoeg4p', encoding="iso-8859-1")
 
 
 def pull_dictionary():
@@ -130,8 +131,9 @@ def correct_letter_checker():
             lose_score += 1
             if lose_score == 1:
                 clue_1(test_word)
-            elif lose_score == 2:
-                if 
+            if lose_score == 5:
+                print("You have one more try, the meaning of the word is: ")
+                print(return_meaning(return_index))
             elif lose_score >= 6:
                 print(f"You hang, the correct word was {test_word}")
                 break
@@ -160,6 +162,7 @@ def clue_last(test_word):
 
 # Clue 3 - last letter
 # Clue 4 - meaning
+
 
 
 # Need to create a second loop to let players play again
@@ -193,3 +196,16 @@ while True:
     print("")
     correct_letter_checker()
     break
+
+
+
+# df = df[["first", "last", 'Species Common Name', 'Scientific Name', 'TaxonClass',
+#        'Overall Sample Size ', 'Overall MLE', 'Overall CI - lower',
+#        'Overall CI - upper', 'Male Sample Size', 'Male MLE', 'Male CI - lower',
+#        'Male CI - upper', 'Female Sample Size ', 'Female MLE',
+#        'Female CI - lower', 'Female CI - upper', 'Male Data Deficient',
+#        'Female Data Deficient']]
+
+# df["first"] + " " + df["last"]  
+
+# df["first"].astype(str).str.cat(df["last"].astype(str), sep = ' ') 
