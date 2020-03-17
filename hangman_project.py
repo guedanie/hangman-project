@@ -3,6 +3,7 @@
 # letter so see if they can guess the word. 
 test_word = "house"
 
+
 def intro():
     print("")
     print("Howdy there, wanna play a game of hangman?")
@@ -14,10 +15,16 @@ def n_letters(test_word):
     return length
 
 def print_dashes(length):
-    dashes = " _ "
+    dashes = " _"
     dashes *= length
     print(dashes)
     print("")
+
+def return_dashes(length):
+    dashes = "_"
+    dashes *= length
+    return dashes
+    
 
 def print_n_letters(length):
     print(f"We are looking for a word with {length} letters")
@@ -51,19 +58,23 @@ def letter_checker(correct_letter_index, user_input):
         print_dashes(n_letters(test_word))
     
 def correct_letter_checker():
-    print("What letter do you wnat to check")
-    user_input = input("")
-    correct_letter_index = test_word.find(user_input)
-    if correct_letter_index != -1:
-        dashes = "_"
-        dashes *= len(test_word)
-        dashes = list(dashes)
-        dashes[correct_letter_index] = user_input
-        new_dashes = ''
-        new_dashes = new_dashes.join(dashes)
-        print(new_dashes)
-    else: 
-        print("Wrong Choice")
+    new_dashes = ''
+    win_score = 0
+    lose_score = 0
+    dashes = list(return_dashes(n_letters(test_word)))
+    while lose_score <= 6 or win_score <= 5:
+        print("What letter do you want to check")
+        user_input = input("")
+        correct_letter_index = test_word.find(user_input)
+        if correct_letter_index != -1:
+            dashes[correct_letter_index] = user_input
+            new_dashes = new_dashes.join(dashes)
+            print(new_dashes)
+            win_score += 1
+        else: 
+            print("Wrong Choice")
+            lose_score += 1
+    print("You hang")
 
 
 
@@ -77,6 +88,7 @@ def correct_letter_checker():
 # ------------------------------- #
 #              Game Loop          #
 # ------------------------------- #
+
 
 while True:
     intro()
