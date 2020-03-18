@@ -6,8 +6,9 @@
 import pandas as pd
 
 # If the csv file doesn't exist in the directory - this will pull it from data.world
-# words = pd.read_csv('https://query.data.world/s/mfp7lfkxfott7zp2sgr3nlfv4v5bpp', encoding= "iso-8859-1")
-# words.to_csv("word-meaning-examples.csv")
+# def pull_list_of_words():
+    # words = pd.read_csv('https://query.data.world/s/mfp7lfkxfott7zp2sgr3nlfv4v5bpp', encoding= "iso-8859-1")
+    # words.to_csv("word-meaning-examples.csv")
 
 
 def pull_dictionary():
@@ -85,52 +86,6 @@ def letter_checker(correct_letter_index, user_input):
         print("That is wrong")
         print_dashes(n_letters(test_word))
     
-# def correct_letter_checker():
-#     new_dashes = ''
-#     win_score = 0
-#     lose_score = 0
-#     dashes = list(return_dashes(n_letters(test_word)))
-#     while True:
-#         print("What letter do you want to check")
-#         user_input = input("")
-#         correct_letter_index = [i for i in range(len(test_word)) if test_word.startswith(user_input, i)]
-#         print(correct_letter_index )
-#         if len(correct_letter_index) > 0:
-#             for x in correct_letter_index:
-#                 dashes[x] = user_input
-#             print(dashes)
-#             win_score += 1
-#             if win_score >= len(set(test_word)):
-#                 new_dashes = new_dashes.join(dashes)
-#                 print(f"You did it! The correct word was {new_dashes}")
-#                 break
-#         else: 
-#             print("Wrong Choice")
-#             lose_score += 1
-#             if lose_score == 1:
-#                 clue_1(test_word)
-#             if lose_score == 5:
-#                 print("You have one more try, the meaning of the word is: ")
-#                 print(return_meaning(index))
-#             elif lose_score >= 6:
-#                 print(f"You hang, the correct word was {test_word}")
-#                 break
-
-
-
-# def is_input_valid():
-#     invalid = True
-#     while invalid:
-#         print("Please enter a letter")
-#         user_input = input("")
-#         if check_if_digit(user_input) == False and check_length(user_input) == True and check_if_special_char(user_input) == False:
-#             return user_input
-#             invalid = False
-#         elif user_input in dashes:
-#             print("You already enter that letter, please enter a new one")
-#         else:
-#             print(f"Please enter a valid letter, {user_input} doesn't work")
-
 
 def is_letter_in_word():
     new_dashes = ''
@@ -146,11 +101,12 @@ def is_letter_in_word():
             user_input = input("")
             duplicate = True
             while duplicate:
-                if user_input in dashes:
+                if user_input not in dashes:
+                    duplicate = False 
+                else:
                     print("You already enter that letter, please enter a new one")
                     user_input = input("")
-                else:
-                    duplicate = False    
+                       
             if check_if_digit(user_input) == False and check_length(user_input) == True and check_if_special_char(user_input) == False:
                 invalid = False
             else: 
@@ -161,7 +117,11 @@ def is_letter_in_word():
             for x in correct_letter_index:
                 dashes[x] = user_input
             print(dashes)
+            print("")
             print(f"The letters already gueesed are: {correct_list}")
+            print("")
+            print(f"You have {6 - lose_score} tries left before you hang")
+            print("")
             win_score += 1
             if win_score >= len(set(test_word)):
                 new_dashes = new_dashes.join(dashes)
@@ -169,10 +129,17 @@ def is_letter_in_word():
                 inPlay = False
         else: 
             print("Wrong Choice")
+            print("")
+            print(dashes)
+            print("")
             print(f"The letters already gueesed are: {correct_list}")
+            print("")
             lose_score += 1
+            print(f"You have {6 - lose_score} tries left before you hang")
             if lose_score == 1:
+                print("")
                 clue_1(test_word)
+                print("")
             if lose_score == 5:
                 print("You have one more try, the meaning of the word is: ")
                 print(return_meaning(index))
@@ -233,10 +200,7 @@ def check_if_special_char(user_input):
     return user_input in special_chars
 
 
-
-# need to write function to pull randomly generated word - ideally find a list of dictionaries in a JSON
-# file with word definitions to give clues or be education. 
-
+# Add difficulty levels - where the users can select between easy, med, or hard and the length of the words are filtered appropiately from the CSV file
 # work on developing a GUI 
 
 
@@ -246,7 +210,7 @@ def check_if_special_char(user_input):
 # ------------------------------- #
 #              Game Loop          #
 # ------------------------------- #
-
+#pull_list_of_words()
 words = pull_dictionary()
 new_dashes = ''
 win_score = 0
@@ -271,9 +235,6 @@ while True:
     else:
         print("Hope not to see you near the knot again")
         break
-
-
-
 
 
 
