@@ -4,7 +4,10 @@
 # test_word = "house"
 # test_word = "mississippi"
 import pandas as pd
-# df = pd.read_csv('https://query.data.world/s/u2erxpyvtsazfatyrigoguunyoeg4p', encoding="iso-8859-1")
+
+# If the csv file doesn't exist in the directory - this will pull it from data.world
+# words = pd.read_csv('https://query.data.world/s/mfp7lfkxfott7zp2sgr3nlfv4v5bpp', encoding= "iso-8859-1")
+# words.to_csv("word-meaning-examples.csv")
 
 
 def pull_dictionary():
@@ -90,53 +93,95 @@ def letter_checker(correct_letter_index, user_input):
 #     while True:
 #         print("What letter do you want to check")
 #         user_input = input("")
-#         correct_letter_index = test_word.find(user_input)
-#         if correct_letter_index != -1:
-#             dashes[correct_letter_index] = user_input
+#         correct_letter_index = [i for i in range(len(test_word)) if test_word.startswith(user_input, i)]
+#         print(correct_letter_index )
+#         if len(correct_letter_index) > 0:
+#             for x in correct_letter_index:
+#                 dashes[x] = user_input
 #             print(dashes)
 #             win_score += 1
-#             if win_score >= n_letters(test_word):
+#             if win_score >= len(set(test_word)):
 #                 new_dashes = new_dashes.join(dashes)
 #                 print(f"You did it! The correct word was {new_dashes}")
 #                 break
 #         else: 
 #             print("Wrong Choice")
 #             lose_score += 1
-#             if lose_score >= 6:
-#                 print("You hang")
+#             if lose_score == 1:
+#                 clue_1(test_word)
+#             if lose_score == 5:
+#                 print("You have one more try, the meaning of the word is: ")
+#                 print(return_meaning(index))
+#             elif lose_score >= 6:
+#                 print(f"You hang, the correct word was {test_word}")
 #                 break
 
 
-def correct_letter_checker():
+
+# def is_input_valid():
+#     invalid = True
+#     while invalid:
+#         print("Please enter a letter")
+#         user_input = input("")
+#         if check_if_digit(user_input) == False and check_length(user_input) == True and check_if_special_char(user_input) == False:
+#             return user_input
+#             invalid = False
+#         elif user_input in dashes:
+#             print("You already enter that letter, please enter a new one")
+#         else:
+#             print(f"Please enter a valid letter, {user_input} doesn't work")
+
+
+def is_letter_in_word():
     new_dashes = ''
     win_score = 0
     lose_score = 0
-    dashes = list(return_dashes(n_letters(test_word)))
-    while True:
-        print("What letter do you want to check")
-        user_input = input("")
+    correct_list = []
+    dashes = list(return_dashes(n_letters(test_word))) 
+    inPlay = True
+    while inPlay:
+        invalid = True
+        while invalid:
+            print("Please enter a letter")
+            user_input = input("")
+            duplicate = True
+            while duplicate:
+                if user_input in dashes:
+                    print("You already enter that letter, please enter a new one")
+                    user_input = input("")
+                else:
+                    duplicate = False    
+            if check_if_digit(user_input) == False and check_length(user_input) == True and check_if_special_char(user_input) == False:
+                invalid = False
+            else: 
+                print(f"Please enter a valid letter, {user_input} doesn't work")
+        correct_list.append(user_input)
         correct_letter_index = [i for i in range(len(test_word)) if test_word.startswith(user_input, i)]
-        print(correct_letter_index )
         if len(correct_letter_index) > 0:
             for x in correct_letter_index:
                 dashes[x] = user_input
             print(dashes)
+            print(f"The letters already gueesed are: {correct_list}")
             win_score += 1
             if win_score >= len(set(test_word)):
                 new_dashes = new_dashes.join(dashes)
                 print(f"You did it! The correct word was {new_dashes}")
-                break
+                inPlay = False
         else: 
             print("Wrong Choice")
+            print(f"The letters already gueesed are: {correct_list}")
             lose_score += 1
             if lose_score == 1:
                 clue_1(test_word)
             if lose_score == 5:
                 print("You have one more try, the meaning of the word is: ")
-                print(return_meaning(return_index))
+                print(return_meaning(index))
             elif lose_score >= 6:
                 print(f"You hang, the correct word was {test_word}")
-                break
+                inPlay = False    
+
+
+        
 
 # Clues
 
@@ -166,10 +211,28 @@ def clue_last(test_word):
 
 
 # Need to create a second loop to let players play again
+def pay_again():
+    print("Would you like to play again?")
+    user_selection = input("")
+    return user_selection.lower()
 
 # Need a function to display words that have already been guessed 
 
 # need to create need functions to limit the input to only strings that aren't digits and no more than one character at a time
+
+# Should come back false
+def check_if_digit(user_input):
+    return str(user_input).isdigit()
+
+# SHould come back as false 
+def check_length(user_input):
+    return len(user_input) == 1
+
+def check_if_special_char(user_input):
+    special_chars = ("@!#$%^&*()[]|\><.,?/+=_")
+    return user_input in special_chars
+
+
 
 # need to write function to pull randomly generated word - ideally find a list of dictionaries in a JSON
 # file with word definitions to give clues or be education. 
@@ -185,19 +248,37 @@ def clue_last(test_word):
 # ------------------------------- #
 
 words = pull_dictionary()
+new_dashes = ''
+win_score = 0
+lose_score = 0
 while True:
-    test_word = return_word(return_index)
-    print(test_word)
+    index = return_index(words)
+    test_word = return_word(index)
+    test_meaning = return_meaning(index)
+    # print(test_word)
+    # print(test_meaning)
     intro()
     print("")
     print_dashes(n_letters(test_word))
     print("")
     print_n_letters(n_letters(test_word))
     print("")
-    correct_letter_checker()
-    break
+    # correct_letter_checker()
+    is_letter_in_word()
+    user_selection = pay_again()
+    if user_selection == "y":
+        continue
+    else:
+        print("Hope not to see you near the knot again")
+        break
 
 
+
+
+
+
+## This HTML link is to an animal names list - for use later
+# df = pd.read_csv('https://query.data.world/s/u2erxpyvtsazfatyrigoguunyoeg4p', encoding="iso-8859-1")
 
 # df = df[["first", "last", 'Species Common Name', 'Scientific Name', 'TaxonClass',
 #        'Overall Sample Size ', 'Overall MLE', 'Overall CI - lower',
