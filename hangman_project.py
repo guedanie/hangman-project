@@ -249,9 +249,43 @@ def check_if_special_char(user_input):
 # drawing the stick man using variables, and then printing those variables as a visualization
 # work on developing a GUI 
 
-
-
-
+import random
+HANGMAN_PICS = ['''
+  +---+
+      |
+      |
+      |
+     ===''', '''
+  +---+
+  O   |
+       |
+       |
+      ===''', '''
+   +---+
+   O   |
+   |   |
+       |
+      ===''', '''
+   +---+
+   O   |
+  /|   |
+       |
+      ===''', '''
+   +---+
+   O   |
+  /|\  |
+       |
+      ===''', '''
+   +---+
+   O   |
+  /|\  |
+  /    |
+      ===''', '''
+   +---+
+   O   |
+  /|\  |
+  / \  |
+      ===''']
 
 # ------------------------------- #
 #              Game Loop          #
@@ -285,6 +319,59 @@ while True:
         break
 
 
+
+
+###### Drawings ####
+
+
+hang_man_pic_1 = [ '''
+  +---+
+      |
+      |
+      |
+        ''' ]
+
+# # ```
+#   +---+
+#   O   |
+#       |
+#       |
+##    ```
+
+# # ```
+#   +---+
+#   O   |
+#   |   |
+#       |
+##    ```
+
+# # ```
+#   +---+
+#   O   |
+#  /|   |
+#       |
+##    ```
+
+# # ```
+#   +---+
+#   O   |
+#  /|\  |
+#       |
+##    ```
+
+# # ```
+#   +---+
+#   O   |
+#  /|\  |
+#  /    |
+##    ```
+
+# # ```
+#   +---+
+#   O   |
+#  /|\  |
+#  / \  |
+##    ```
 
 ## This HTML link is to an animal names list - for use later
 # df = pd.read_csv('https://query.data.world/s/u2erxpyvtsazfatyrigoguunyoeg4p', encoding="iso-8859-1")
