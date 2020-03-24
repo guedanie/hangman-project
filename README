@@ -31,7 +31,9 @@ Even further, the objective is to eventually be able to create a GUI, potentiall
 
 To further practice my Python skills, I challenge myself to learn Pygame, and to create a GUI version of the hangman game. Given the complexity of Pygame, the game has become a little simpler, but the objective was to create a functonal game with a GUI that a regular user (not familar with the terminal) could use. The project turned out to be a really good introduction point for Pygame, as it didn't require animations or too many images. 
 
-Although I did lots of research online to get more familiar with the program, large part of my code for the pygame version is inspired by Tim from "Tech with Tim" (link to his Github below). Most of the code is my own, but there were ideas and code from Tim's version that were particularly helpful. 
+Although I did lots of research online to get more familiar with the program, large part of my code for the pygame version is inspired by Tim from "Tech with Tim" (link to his Github below). Most of the code is my own, but there were ideas and code from Tim's version that were particularly helpful. Images were also from his repo.
+
+Link to Github: https://github.com/techwithtim/Hangman
 
 ## Instructions
 
