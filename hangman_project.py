@@ -186,6 +186,8 @@ def is_letter_in_word():
             if lose_score == 5: # on their last turn, it shows players the word definition for further help
                 print("You have one more try, the meaning of the word is: ")
                 print("")
+                print("Your last clue, before you hang!")
+                print("")
                 print(return_meaning(index))
                 print("")
             elif lose_score >= 6: # if counter is 6 - then the game is over
@@ -204,17 +206,19 @@ def clue_1(test_word):
     for x in test_word:
         if x in vowels:
             vowel_counter += 1
-    print(f"The word has {vowel_counter} vowels")
+    print(f"Clue # 1: The word has {vowel_counter} vowels")
 
 
 # Clue 2 - first letter
 
 def clue_first(test_word):
     clue_2 = test_word[0]
-    print(f"The first letter of the word is {clue_2}")
+    print(f": The first letter of the word is {clue_2}")
 
 def clue_last(test_word):
     clue_3 = test_word[-1]
+    print(" You last clue is the words definition: ")
+    print("")
     print(f"The first letter of the word is {clue_3}")
 
 # Clue 3 - last letter
