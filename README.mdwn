@@ -2,7 +2,7 @@
 
 ## How to Play:
 
-* Pygame Version: 
+* **Pygame Version**: 
     To play this game, you need to install pygame. Here is a link to a youtube video (from Tech with Tim) on how to do it for macs: https://www.youtube.com/watch?v=E-WhAS6qzsU
 
     You will also need to download all the images in the repo, as well as the document called: "word-meaning-examples.csv". This is where the random words will be pulled from. Both documents need to be saved in the same directory as the "hangman_project_pygame.py" file. 
@@ -10,7 +10,7 @@
     Once all files are in a directory. Open your terminal and navigate to the directory where the files are. Once there, type `pgzrun hangman_project_pygame.py`
     into the command line. This line will run the py file using Pygame.
 
-* Command Line Version:
+* **Command Line Version**:
     Make sure to download and store the "hangman_project.py" and "word-meaning-examples.csv" in the same directory. From the terminal, navigate to the folder with the file, and type `python hangman_project.py`, and then follow the onscreen instructions.
 
 ## Objective:
