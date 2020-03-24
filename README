@@ -26,3 +26,17 @@ The game ends when either the word is completed (meaning there are no empty dash
 Further improvements will be do create a more visual representation, but creating stickfigures and storing them in variables which can then be called when a wrong input is added, creating a more visual game.
 
 Even further, the objective is to eventually be able to create a GUI, potentially using pygame, to improve the experience. 
+
+# Pygame Version
+
+To further practice my Python skills, I challenge myself to learn Pygame, and to create a GUI version of the hangman game. Given the complexity of Pygame, the game has become a little simpler, but the objective was to create a functonal game with a GUI that a regular user (not familar with the terminal) could use. The project turned out to be a really good introduction point for Pygame, as it didn't require animations or too many images. 
+
+Although I did lots of research online to get more familiar with the program, large part of my code for the pygame version is inspired by Tim from "Tech with Tim" (link to his Github below). Most of the code is my own, but there were ideas and code from Tim's version that were particularly helpful. 
+
+## Instructions
+
+To play this game, you need to install pygame. Here is a link to a youtube video (from Tech with Tim) on how to do it for macs: https://www.youtube.com/watch?v=E-WhAS6qzsU
+
+You will also need to download all the images in the repo, as well as the document called: "word-meaning-examples.csv". This is where the random words will be pulled from. 
+
+I hope you enjoy the game!
