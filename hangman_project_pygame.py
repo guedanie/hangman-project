@@ -32,6 +32,9 @@ lose_counter = 0
 
 def select_secret_word():
     words = pd.read_csv("word-meaning-examples.csv")
+    space = words["Word"].str.contains(' ')
+    dash = words["Word"].str.contains("-")
+    words = words[~dash & ~space]
     random_sample = words.sample()
     index = random_sample.index
     random_sample = words.loc[index]
@@ -59,7 +62,7 @@ labels = []
 # stored all guessed letters
 guessed = []
 # Print the original "spaced-out word" becasue on the length of the secret word. 
-dashes = "_" * len(test_word)
+dashes = "_ " * len(test_word)
 
 
 #################################
@@ -115,6 +118,23 @@ def create_circles():
         buttons.append([LIGHT_BLUE, x, y, 20, True, char_index])
         # buttons.append([color, x_pos, y_pos, radius, visible, char_index])
 
+def draw_intro():
+    display_surface.fill(WHITE)
+
+    message("Howdy Curie, wanna play a game of Hangman?", win_width // 2, win_height // 2, 40)
+
+    message("Press any key to start", 475,350, 30)
+
+    pygame.display.update()
+
+    intro = True
+    while intro:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                intro = False
+
 # Main function that redraws the window every turn, updating the circles, as well as the text
 def draw_circles_and_labels():
     global lose_counter
@@ -138,7 +158,7 @@ def draw_circles_and_labels():
     for i in range(len(labels)):
         button_label(labels[i], buttons[i][1], buttons[i][2])
 
-    message(f"Guessed letters: {str(guessed)}", 300, 400, 30)
+    message(f"Guessed letters: {guessed}", 300, 400, 30)
 
     pygame.display.update()  
 
@@ -157,12 +177,11 @@ def is_chr_in_word(letter): # Function used to update the list with the correctl
 
     correct_letter_index = [i for i in range(len(test_word)) if test_word.startswith(letters[letter], i)]
 
-    dashes = list(dashes)
+    dashes = list(dashes.replace(' ',''))
     for x in correct_letter_index:
         dashes[x] = letters[letter]
-    dashes = ''.join(dashes)
-    # dashes.replace(" ", "")
-        
+    dashes = ' '.join(dashes)
+    
     
 def end(winner=False): #Function used to end the game - and offer the opportunity to replay
     global index
@@ -183,7 +202,7 @@ def end(winner=False): #Function used to end the game - and offer the opportunit
 
     message(label, win_width/2, win_height/2, 30)
     message(f"The word was: {test_word}", 475,350, 30)
-    message(f"The meaning is: {meaning}", 375, 400, 30)
+    message(f"The meaning is: {meaning}", 375, 400, 25)
 
     pygame.display.update()
 
@@ -212,7 +231,7 @@ def reset(): # If player wants to play again, this resets all the global varible
     index = test_word_and_index[1]
     letters = "abcdefghijklmnopqrstuvwxyz" 
     guessed = []
-    dashes = "_" * len(test_word)
+    dashes = "_ " * len(test_word)
     lose_counter = 0
     win_counter = 0
     
@@ -227,6 +246,8 @@ def reset(): # If player wants to play again, this resets all the global varible
 create_circles() 
     
 create_label_list()
+
+draw_intro()
 
 inPlay = True
 
