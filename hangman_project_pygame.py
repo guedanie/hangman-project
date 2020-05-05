@@ -151,11 +151,11 @@ def draw_circles_and_labels():
 
     global labels 
 
-    for i in range(len(buttons)):
+    for i in range(len(buttons)): # Loop to draw circles
         if buttons[i][4] == True:
             pygame.draw.circle(display_surface, BLUE, (buttons[i][1], buttons[i][2]),  15, 0)  
         
-    for i in range(len(labels)):
+    for i in range(len(labels)): # Loop to draw labels
         button_label(labels[i], buttons[i][1], buttons[i][2])
 
     message(f"Guessed letters: {guessed}", 300, 400, 30)
@@ -250,7 +250,6 @@ create_label_list()
 draw_intro()
 
 inPlay = True
-
 while inPlay: # main game loop
     
     
